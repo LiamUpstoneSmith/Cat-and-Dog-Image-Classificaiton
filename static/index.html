@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cat vs Dog Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            text-align: center;
+        }
+        img {
+            max-width: 300px;
+            margin-top: 20px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+        #result {
+            font-size: 1.2rem;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .center {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload an image of a Dog or Cat for classification</h2>
+    <form id="upload-form">
+        <input id="file-input" type="file" accept="image/*" />
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Image Preview -->
+    <div id="preview-container">
+        <img id="preview" style="display:none;" class="center" />
+    </div>
+
+    <!-- Prediction Result -->
+    <div id="result"></div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('preview');
+        const resultDiv = document.getElementById('result');
+        const apiUrl = `${window.location.origin}/predict-image/`;  // Full URL detection
+
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            }
+        });
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('Please select a file first.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            resultDiv.textContent = "Processing...";
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log("Server response:", data); // Debug
+
+                if (data.prediction) {
+                    resultDiv.textContent = `Prediction: ${data.prediction}`;
+                } else if (data.error) {
+                    resultDiv.textContent = `Error: ${data.error}`;
+                }
+
+            } catch (err) {
+                console.error("Fetch error:", err);
+                resultDiv.textContent = `Error: ${err.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
