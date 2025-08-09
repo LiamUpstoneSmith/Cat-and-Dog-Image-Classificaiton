@@ -17,6 +17,7 @@ A convolutional neural network (CNN) based image classifier built with PyTorch, 
 - [Usage](#usage)
 - [API](#api)  
 - [Web Interface](#web-interface)  
+- [Training](#training)
 - [Evaluation](#evaluation)  
 - [Potential Improvements](#potential-improvements)
 - [License](#license)  
@@ -143,8 +144,7 @@ This seamless, single-page experience makes it easy to interact with the model i
 
 ---
 
-## Training & Evaluation
-### Training Procedure
+## Training
 The model is trained using **PyTorch** with the following steps:
 
 1. Data Loading
@@ -175,7 +175,7 @@ The model is trained using **PyTorch** with the following steps:
 
 4. Optimization
 
-- Typically trained with the Adam optimizer (lr=0.001 by default).
+- Typically trained with the Adam optimizer (lr=0.0001 by default).
 
 - Learning rate scheduling (e.g., ReduceLROnPlateau) can be applied to improve convergence.
 
