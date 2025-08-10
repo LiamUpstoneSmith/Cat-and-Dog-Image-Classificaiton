@@ -44,6 +44,7 @@ This project builds a CNN to classify images as either cat or dog. Images are lo
 
 - Two classes: Cats (label 0) and Dogs (label 1).  
 - Images are resized to 64x64 pixels and normalized before training.
+- The dataset used in this project is sourced from [Kaggle: Dog and Cat Classification Dataset](https://www.kaggle.com/datasets/bhavikjikadara/dog-and-cat-classification-dataset) 
 
 ---
 
