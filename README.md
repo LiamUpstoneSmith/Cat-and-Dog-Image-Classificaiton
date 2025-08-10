@@ -1,7 +1,5 @@
 # Cat vs Dog Image Classifier
 
-![Project Banner](path_to_image_if_any)  
-
 A convolutional neural network (CNN) based image classifier built with PyTorch, designed to distinguish between images of cats and dogs. The project includes a clean modular structure, dataset preprocessing, model training, and a REST API interface with FastAPI for real-time predictions through a simple web frontend.
 
 ---
